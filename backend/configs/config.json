@@ -1,0 +1,6 @@
+{
+    "whitelist": ["http://localhost:8080"],
+    "default_port": 3000,
+    "google_map_api_url": "https://maps.googleapis.com/maps/api",
+    "google_map_api_key": "AIzaSyAnBK2T1T-Me7uwH79pRDFlAY5P2346t70"
+}
