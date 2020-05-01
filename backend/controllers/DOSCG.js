@@ -1,6 +1,5 @@
 const { handleError, ErrorHandler, HttpStatus } = require("../utils/error");
 const DOSCG = require("../models/DOSCG");
-const axios = require('axios');
 const config = require('../configs/config')
 const https = require('https');
 
@@ -40,7 +39,7 @@ const getPlace = (req, res) => {
           if (!name)
                throw new ErrorHandler(HttpStatus.BAD_REQUEST, "Please filled missing value");
                
-          var url = config.google_map_api_url + '/place/findplacefromtext/json?input=' + name + '&inputtype=textquery' + '&fields=name' + '&key=' + config.google_map_api_key
+          var url = config.google_map_api_url + '/place/findplacefromtext/json?input=' + name + '&inputtype=textquery' + '&fields=name,photos' + '&key=' + config.google_map_api_key
           
           https.get(url, (resp) => {
           let data = '';
@@ -54,7 +53,10 @@ const getPlace = (req, res) => {
           resp.on('end', () => {
                result = JSON.parse(data)
                if(result.status == "OK"){
-                    return res.json({success: true, message:result.candidates[0].name});
+                    place_name = result.candidates[0].name;
+                    place_photo = result.candidates[0].photos[0].photo_reference;
+                    place_photo_url = config.google_map_api_url + '/place/photo?maxwidth=400&photoreference=' + place_photo + '&sensor=false&key=' + config.google_map_api_key
+                    return res.json({success: true, message:{"name":place_name,"photo":place_photo_url}});
                }else{
                     return res.json({success: false, message:"No result"});
                }
@@ -106,9 +108,44 @@ const getRoute = (req, res) => {
      }
 }
 
+fs = require('fs');   
+Stream = require('stream').Transform
+
+const getStaticMap = (req, res) => {
+     try {
+          const { encoded_polyline } = req.body;
+          if (!encoded_polyline)
+               throw new ErrorHandler(HttpStatus.BAD_REQUEST, "Please filled missing value");
+               
+          var url = config.google_map_api_url + '/staticmap?size=600x400&path=enc%3A' + encoded_polyline + '&key=' + config.google_map_api_key
+          
+          https.get(url, (resp) => {
+               var data = new Stream();      
+
+               // A chunk of data has been recieved.
+               resp.on('data', function(chunk) {                                       
+                    data.push(chunk);                                                         
+               });  
+
+               // The whole response has been received. Print out the result.
+               resp.on('end', () => {
+                    // fs.writeFileSync('/map.png', data.read()); 
+                    return res.end(data.read())
+               });
+
+               }).on("error", (err) => {
+                    return handleError(err, res);
+               });
+          
+     } catch (error) {
+          return handleError(error, res);
+     }
+}
+
 module.exports = {
      getXYZ,
      getBC,
      getPlace,
-     getRoute
+     getRoute,
+     getStaticMap
 };

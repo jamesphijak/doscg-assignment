@@ -1,0 +1,21 @@
+{
+  "name": "doscg_application",
+  "version": "1.0.0",
+  "description": "\"# SCG Assignment\"",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
+    "start:frontend": "cd Frontend && npm run serve",
+    "start:backend": "cd Backend && npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jamesphijak/doscg-assignment.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^5.1.0"
+  }
+}

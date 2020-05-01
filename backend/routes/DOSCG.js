@@ -4,7 +4,8 @@ var DOSCG = require('../controllers/DOSCG');
 // router.post('/', DOSCG.updateBook);
 router.post('/getXYZ', DOSCG.getXYZ);
 router.post('/getBC', DOSCG.getBC);
-router.get('/getPlace', DOSCG.getPlace);
-router.get('/getRoute', DOSCG.getRoute);
+router.post('/getPlace', DOSCG.getPlace);
+router.post('/getRoute', DOSCG.getRoute);
+router.post('/getStaticMap', DOSCG.getStaticMap);
 
 module.exports = router;
