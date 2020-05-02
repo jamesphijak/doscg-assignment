@@ -5,9 +5,6 @@ import FindXYZ from '../views/FindXYZ.vue'
 import FindBC from '../views/FindBC.vue'
 import FindBestRoute from '../views/FindBestRoute.vue'
 
-import Register from '../views/Register.vue'
-import Login from '../views/Login.vue'
-
 Vue.use(VueRouter)
 
   const routes = [
