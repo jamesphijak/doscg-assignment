@@ -33,10 +33,10 @@
                             <div v-if="place_origin_photo != '' && place_destination_photo != '' "
                                 class="row text-center">
                                 <div class="col-md-6">
-                                    <img :src="place_origin_photo" alt="origin" width="300px">
+                                    <img :src="place_origin_photo" alt="origin" class="img-fluid">
                                 </div>
                                 <div class="col-md-6">
-                                    <img :src="place_destination_photo" alt="destination" width="300px">
+                                    <img :src="place_destination_photo" alt="destination" class="img-fluid">
                                 </div>
                             </div>
 
@@ -54,10 +54,10 @@
                                     <h2 class=" text-center"><i class="fas fa-info-circle"></i> Details</h2>
                                     <hr>
 
-                                    <div class="justify-content-center"><img :src="map" alt="destination" width="500px">
+                                    <div class="justify-content-center"><img :src="map" alt="destination" class="img-fluid">
                                     </div>
                                     <br>
-    
+                                    <div class="table-responsive">
                                     <table class="table">
                                         <tbody>
                                             <tr>
@@ -91,7 +91,7 @@
                                             
                                         </tbody>
                                     </table>
-
+                                    </div>
                                 </div>
 
                                 <div class="col-md-6">
