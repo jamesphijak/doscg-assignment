@@ -3,6 +3,7 @@ const DOSCG = require("../models/DOSCG");
 const config = require('../configs/config')
 const https = require('https');
 Stream = require('stream').Transform
+const request = require('request')
 
 const getXYZ  = (req, res) => {
      try {
@@ -149,12 +150,81 @@ const getStaticMap = (req, res) => {
      }
 }
 
+const getWebhook = (req, res) => {
+     try {
+          let reply_token = req.body.events[0].replyToken
+          let msg = req.body.events[0].message.text
+          if(msg == 'Hello' || msg == 'สวัสดี' || msg == 'hello'){
+               reply(reply_token, 'สวัสดีครับ ผมพิจักษณ์เองครับ');
+          }
+          else if(msg == 'bye' || msg == 'บาย' || msg == 'bye bye'){
+               reply(reply_token, 'แล้วพบกันใหม่ครับ');
+          }
+          else{
+               sleep(10000).then(() => { // wait 10 seconds
+                    console.log('No reply');
+                    line_notify(config.line_notify_token,"\nBot can't response with this message:\n" + msg)
+               });
+          }
+          res.sendStatus(200)
+     } catch (error) {
+          return handleError(error, res);
+     }
+}
 
+const sleep = (waitTimeInMs) => new Promise(resolve => setTimeout(resolve, waitTimeInMs));
+
+function line_notify(token, message){ 
+  request({
+    method: 'POST',
+    uri: config.line_notify_url,
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    auth: {
+      'bearer': token
+    },
+    form: {
+      message: message
+    }
+  }, (err, httpResponse, body) => {
+    if(err){
+      console.log(err);
+    } else {
+      console.log(httpResponse)
+      console.log(body)
+    }
+  });
+}
+
+
+ 
+function reply(reply_token, msg) {
+     let headers = {
+         'Content-Type': 'application/json',
+         'Authorization': 'Bearer ' + config.line_message_api_channel_access_token
+     }
+     let body = JSON.stringify({
+          replyToken: reply_token,
+          messages: [{
+              type: 'text',
+              text: msg
+          }]
+      })
+      request.post({
+          url: config.line_message_api_url + '/bot/message/reply',
+          headers: headers,
+          body: body
+      }, (err, res, body) => {
+          console.log('status = ' + res.statusCode);
+      });
+ }
 
 module.exports = {
      getXYZ,
      getBC,
      getPlace,
      getRoute,
-     getStaticMap
+     getStaticMap,
+     getWebhook
 };

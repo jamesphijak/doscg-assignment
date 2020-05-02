@@ -7,5 +7,6 @@ router.post('/getBC', DOSCG.getBC);
 router.post('/getPlace', DOSCG.getPlace);
 router.post('/getRoute', DOSCG.getRoute);
 router.post('/getStaticMap', DOSCG.getStaticMap);
+router.post('/webhook', DOSCG.getWebhook)
 
 module.exports = router;

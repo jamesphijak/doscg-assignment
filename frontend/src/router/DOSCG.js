@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import FindXYZ from '../views/FindXYZ.vue'
 import FindBC from '../views/FindBC.vue'
 import FindBestRoute from '../views/FindBestRoute.vue'
+import LineBot from '../views/LineBot.vue'
 
 Vue.use(VueRouter)
 
@@ -11,7 +12,8 @@ Vue.use(VueRouter)
     { path: '/', name: 'Home', component: Home , meta: { title: 'Curriculum Vitae' }},
     { path: '/findxyz', name: 'FindXYZ', component: FindXYZ , meta: { title: 'Find XYZ' }},
     { path: '/findbc', name: 'FindBC', component: FindBC , meta: { title: 'Find BC' }},
-    { path: '/findbestroute', name: 'FindBestRoute', component: FindBestRoute , meta: { title: 'Find Best Route' }}
+    { path: '/findbestroute', name: 'FindBestRoute', component: FindBestRoute , meta: { title: 'Find Best Route' }},
+    { path: '/linebot', name: 'LineBot', component: LineBot , meta: { title: 'Line Bot Video Test' }}
 ]
 
 const router = new VueRouter({

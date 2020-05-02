@@ -51,7 +51,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
  */
 const route = require('./routes/index')
 app.use('/api', route);
-
 /**
  * check backend start
  */

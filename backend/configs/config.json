@@ -2,5 +2,9 @@
     "whitelist": ["http://localhost:8080","https://doscg-phijak-frontend.herokuapp.com"],
     "default_port": 3000,
     "google_map_api_url": "https://maps.googleapis.com/maps/api",
-    "google_map_api_key": "AIzaSyAnBK2T1T-Me7uwH79pRDFlAY5P2346t70"
+    "google_map_api_key": "AIzaSyAnBK2T1T-Me7uwH79pRDFlAY5P2346t70",
+    "line_message_api_channel_access_token": "zqszo0s6HCQs04iTDNolubR6pAcTqj7wXl9VzIXUEaDBqCOE/6D1w/a2y48mt98l+JDFyujfVsiUTQd5lLMAToRw+SGAYvcQAZwmGcHT3PNwe7lW7QxMfHwGUqId4y9913+esKJh/mInBq2PL3bJrAdB04t89/1O/w1cDnyilFU=",
+    "line_message_api_url": "https://api.line.me/v2",
+    "line_notify_token": "WlgscXumb4yAU25tqxCamGq158RutJHabTpj2n93R0g",
+    "line_notify_url": "https://notify-api.line.me/api/notify"
 }

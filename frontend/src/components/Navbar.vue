@@ -26,6 +26,9 @@
                         <a class="dropdown-item" @click="redirectFindBestRoute">Find Best Route From Google Map API</a>
                     </div>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" @click="redirectLineBot">Line Bot Message API Video</a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -46,6 +49,9 @@
             },
             redirectFindBestRoute() {
                 this.$router.push({name: "FindBestRoute"});
+            },
+            redirectLineBot() {
+                this.$router.push({name: "LineBot"});
             }
         }
     }
