@@ -8,7 +8,7 @@
             <div class="card-body">
               <h1 class="card-title">Curriculum Vitae</h1>
               <h3 class="card-subtitle mb-2 text-muted">Mr. Phijak Chanyawiwatkul (James)</h3>
-              <img src="/images/resume.jpg" alt="Logo" class="img-logo">
+              <img src="/images/resume.jpg" alt="Logo" class="img-fluid">
             </div>
           </div>
         </div>
@@ -41,5 +41,7 @@
         margin-top: 10%;
         margin-bottom: 15%;
     } */
+
+    
 
 </style>

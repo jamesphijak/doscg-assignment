@@ -8,10 +8,10 @@ import FindBestRoute from '../views/FindBestRoute.vue'
 Vue.use(VueRouter)
 
   const routes = [
-    { path: '/', name: 'Home', component: Home },
-    { path: '/findxyz', name: 'FindXYZ', component: FindXYZ },
-    { path: '/findbc', name: 'FindBC', component: FindBC },
-    { path: '/findbestroute', name: 'FindBestRoute', component: FindBestRoute }
+    { path: '/', name: 'Home', component: Home , meta: { title: 'Curriculum Vitae' }},
+    { path: '/findxyz', name: 'FindXYZ', component: FindXYZ , meta: { title: 'Find XYZ' }},
+    { path: '/findbc', name: 'FindBC', component: FindBC , meta: { title: 'Find BC' }},
+    { path: '/findbestroute', name: 'FindBestRoute', component: FindBestRoute , meta: { title: 'Find Best Route' }}
 ]
 
 const router = new VueRouter({
@@ -19,5 +19,12 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+
+const app_name = ' | SCG Assignment'
+router.beforeEach((to, from, next) => {
+  document.title =  to.meta.title + app_name
+  next()
+});
+
 
 export default router
