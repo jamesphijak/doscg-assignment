@@ -2,6 +2,7 @@ const { handleError, ErrorHandler, HttpStatus } = require("../utils/error");
 const DOSCG = require("../models/DOSCG");
 const config = require('../configs/config')
 const https = require('https');
+Stream = require('stream').Transform
 
 const getXYZ  = (req, res) => {
      try {
@@ -39,7 +40,7 @@ const getPlace = (req, res) => {
           if (!name)
                throw new ErrorHandler(HttpStatus.BAD_REQUEST, "Please filled missing value");
                
-          var url = config.google_map_api_url + '/place/findplacefromtext/json?input=' + name + '&inputtype=textquery' + '&fields=name,photos' + '&key=' + config.google_map_api_key
+          var url = config.google_map_api_url + '/place/findplacefromtext/json?input=' + name + '&inputtype=textquery&fields=name,place_id,photos&language=th&region=TH&key=' + config.google_map_api_key
           
           https.get(url, (resp) => {
           let data = '';
@@ -52,11 +53,17 @@ const getPlace = (req, res) => {
           // The whole response has been received. Print out the result.
           resp.on('end', () => {
                result = JSON.parse(data)
+               console.log(result)
                if(result.status == "OK"){
-                    place_name = result.candidates[0].name;
+                    var place_name = result.candidates[0].name;
+                    var place_id = result.candidates[0].place_id;
+
                     place_photo = result.candidates[0].photos[0].photo_reference;
                     place_photo_url = config.google_map_api_url + '/place/photo?maxwidth=400&photoreference=' + place_photo + '&sensor=false&key=' + config.google_map_api_key
-                    return res.json({success: true, message:{"name":place_name,"photo":place_photo_url}});
+                    return res.json({success: true, message:{
+                         "name":place_name,
+                         "photo":place_photo_url
+                    }});
                }else{
                     return res.json({success: false, message:"No result"});
                }
@@ -64,6 +71,7 @@ const getPlace = (req, res) => {
           });
 
           }).on("error", (err) => {
+               console.log(err);
                return handleError(err, res);
           });
           
@@ -108,8 +116,7 @@ const getRoute = (req, res) => {
      }
 }
 
-fs = require('fs');   
-Stream = require('stream').Transform
+
 
 const getStaticMap = (req, res) => {
      try {
@@ -141,6 +148,8 @@ const getStaticMap = (req, res) => {
           return handleError(error, res);
      }
 }
+
+
 
 module.exports = {
      getXYZ,

@@ -51,7 +51,7 @@
                             <br>
                             <div class="row" v-if="open_details != false">
                                 <div class="col-md-6">
-                                    <h2><i class="fas fa-info-circle"></i> Details</h2>
+                                    <h2 class=" text-center"><i class="fas fa-info-circle"></i> Details</h2>
                                     <hr>
 
                                     <div class="justify-content-center"><img :src="map" alt="destination" width="500px">
