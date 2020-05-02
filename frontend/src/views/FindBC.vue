@@ -78,7 +78,8 @@
         methods: {
             // Login
             onFindBC() {
-                const response = axios.post("api/doscg/getBC", { "a":this.a , "ans_b": this.ans_b , "ans_c":this.ans_c} )
+                const url = process.env.VUE_APP_API_URL
+                const response = axios.post(url + "/api/doscg/getBC", { "a":this.a , "ans_b": this.ans_b , "ans_c":this.ans_c} )
                     .then(response => {
                         console.log(response.data);
                         this.b = response.data.message.b

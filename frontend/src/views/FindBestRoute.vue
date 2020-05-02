@@ -119,6 +119,7 @@
     import Navbar from '../components/Navbar.vue';
     import Bottombar from '../components/Bottombar.vue';
     import axios from 'axios';
+    const url = process.env.VUE_APP_API_URL;
     export default {
         name: "FindBestRoute",
         data() {
@@ -149,7 +150,7 @@
         methods: {
             // Login
             onFindPlaceDetail() {
-                const find_origin = axios.post("api/doscg/getPlace", {
+                const find_origin = axios.post(url + "/api/doscg/getPlace", {
                         "name": this.raw_origin
                     })
                     .then(response => {
@@ -161,7 +162,7 @@
                         console.log(error);
                     });
 
-                const find_destination = axios.post("api/doscg/getPlace", {
+                const find_destination = axios.post(url + "/api/doscg/getPlace", {
                         "name": this.raw_destination
                     })
                     .then(response => {
@@ -176,7 +177,7 @@
 
             },
             onFindBestRoute() {
-                const find_route = axios.post("api/doscg/getRoute", {
+                const find_route = axios.post(url + "/api/doscg/getRoute", {
                         "origin": this.place_origin_name,
                         "destination": this.place_destination_name
                     })
@@ -194,7 +195,7 @@
 
                         let config = {
                             // example url
-                            url: 'api/doscg/getStaticMap',
+                            url: url + '/api/doscg/getStaticMap',
                             method: 'POST',
                             responseType: 'arraybuffer',
                             data: {

@@ -34,6 +34,7 @@
     import Navbar from '../components/Navbar.vue';
     import Bottombar from '../components/Bottombar.vue';
     import axios from 'axios';
+
     export default {
         name: "FindXYZ",
         data() {
@@ -49,7 +50,8 @@
         methods: {
             // Login
             onFindXYZ() {
-                const response = axios.post("api/doscg/getXYZ", { "missing_list":this.missing_list} )
+                const url = process.env.VUE_APP_API_URL
+                const response = axios.post(url + "/api/doscg/getXYZ", { "missing_list":this.missing_list} )
                     .then(response => {
                         console.log(response.data);
                         this.found_list = response.data.message
